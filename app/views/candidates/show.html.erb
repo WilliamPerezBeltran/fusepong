@@ -1,0 +1,47 @@
+______________________
+<h1>los datos del candidato son:</h1>
+
+<p>
+	Nombre: <%= @candidate.name %>
+</p>	
+
+<p>
+	Appellido: <%= @candidate.last_name %>
+</p>	
+
+<p>
+	Partido: <%= @candidate.party %>
+</p>	
+
+<p>
+	Descripcion: <%= @candidate.description %>
+</p>	
+__________
+<h2>Propuestas</h2>
+<% @candidate.proposals.each do |proposal| %>
+	<p>*
+		Titulo: <%= proposal.title %>
+	</p>
+	<p>*
+		Titulo: <%= proposal.title %>
+	</p>
+------------------------------------------------
+<% end %>
+
+<% if signed_in? %>
+	<%= form_for [@candidate, @candidate.proposals.build] do |f| %>
+		<p>
+			<%= f.label :title %>
+			<%= f.text_field :title%>
+		</p>
+		<p>
+			<%= f.label :Descripción %>
+			<%= f.text_area :description%>
+		</p>
+		<%= f.submit 'Crear propuesta'%>
+	<% end %>
+
+<% end %>
+
+
+<%= link_to 'back', candidates_path %>

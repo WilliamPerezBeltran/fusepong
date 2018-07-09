@@ -1,15 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Fusepong</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Fusepong</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
-    <%= yield %>
-  </body>
+<body>
+  <%if signed_in? %>
+    <p>
+      hola <%= current_user.name %> 
+      tu rol es <%= current_user.role_id %>
+    </p>
+    <p>
+      <%= link_to 'logout', logout_path, method: :delete %>
+    </p>
+    
+  <% end %>
+
+  <p>
+    <%=link_to 'signup', new_user_path%>
+  </p>
+
+  <p>
+    <%=link_to 'signin', login_path%>
+  </p>
+  ____________________________________________________
+
+
+  <%= yield %>
+</body>
 </html>

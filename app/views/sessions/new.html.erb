@@ -1,0 +1,18 @@
+<h1>ingresar</h1>
+<%= form_tag controller: :sessions, action: :create do %>
+	<p>
+		<%= label_tag(:email, "email")%>
+		<%= email_field_tag(:email, nil)%>
+	</p>
+	<p>
+		<%= label_tag(:password, 'password')%>
+		<%= password_field_tag(:password, nil)%>
+	</p>
+
+	<%= select_tag(:role_id, options_for_select(@roles.collect{|u|[u.name, u.id]}))%>
+
+
+	<p>
+		<%= submit_tag('Ingresar')%>
+	</p>
+<% end %>

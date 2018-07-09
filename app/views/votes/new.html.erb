@@ -1,0 +1,38 @@
+<h1>Candidatos</h1>
+
+<table>
+	<tr>
+		<th>Nombre</th>
+		<th>Apellido</th>
+		<th>Partido</th>
+		<th>Descripcion</th>
+		<th>Propuestas</th>
+		<th></th>
+		<th></th>
+	</tr>
+	<% @candidates.each do |candidate| %>
+	<tr>
+		
+		
+		<td><%= candidate.name %></td>
+		<td><%= candidate.last_name %></td>
+		<td><%= candidate.party %></td>
+		<td><%= candidate.description %></td>
+		<td><%= candidate.proposals.count %></td>
+		<td>
+			<button>
+				<%= link_to 'Votar por este participante ', votes_path(candidate), method: :post, data: {confirm: 'Esta seguro de votar por este participante?'}%>
+			</button>
+			
+				
+			</td>
+	</tr>
+	
+	<% end %>
+	
+</table>
+
+<td>
+	<%= link_to 'Crear candidato', new_candidate_path %>
+</td>
+

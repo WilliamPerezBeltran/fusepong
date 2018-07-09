@@ -1,0 +1,8 @@
+<%= form_for @user do |f| %>
+	<%= f.text_field :name , placeholder:'name' %>
+	<%= f.email_field :email , placeholder: 'email' %>
+	<%= f.password_field :password , placeholder: 'password' %>
+	<%= f.select(:role_id, options_for_select(@roles.collect{|u|[u.name,u.id]}))%>
+	<%= f.submit 'enviar'%>
+
+<% end %>

@@ -1,0 +1,30 @@
+<%= form_for @candidate do |f| %>
+	<% if @candidate.errors.any? %>
+		<h2>
+			<%= pluralize(@candidate.errors.count,'error')%> prohibited this article form being saved
+		</h2>
+		<ul>
+			<%= @candidate.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		</ul>
+	<% end %>
+	<p>
+		<%= f.label :name %>
+		<%= f.text_field :name%>
+	</p>
+	<p>
+		<%= f.label :last_name%>
+		<%= f.text_field :last_name%>
+	</p>
+	<p>
+		<%= f.label :party %>
+		<%= f.text_field :party %>
+	</p>
+	<p>
+		<%= f.label :description %>
+		<%= f.text_area :description %>
+	</p>
+	<%= f.submit 'crear candidate'%>
+
+<% end %>

@@ -10,12 +10,66 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_04_160434) do
+ActiveRecord::Schema.define(version: 2018_07_06_145312) do
+
+  create_table "candidates", force: :cascade do |t|
+    t.string "name"
+    t.string "last_name"
+    t.string "party"
+    t.string "description"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_candidates_on_user_id"
+  end
+
+  create_table "proposals", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.integer "candidate_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["candidate_id"], name: "index_proposals_on_candidate_id"
+    t.index ["user_id"], name: "index_proposals_on_user_id"
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
+    t.integer "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_users_on_role_id"
+  end
+
+  create_table "voters", force: :cascade do |t|
+    t.string "name"
+    t.string "last_name"
+    t.string "birth"
+    t.string "cedula"
+    t.integer "role_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_voters_on_role_id"
+    t.index ["user_id"], name: "index_voters_on_user_id"
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.integer "candidate_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["candidate_id"], name: "index_votes_on_candidate_id"
+    t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
 end

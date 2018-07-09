@@ -1,0 +1,37 @@
+<h1>All voter</h1>
+
+<table>
+	<tr>
+		<th>Nombre</th>
+		<th>Apellido</th>
+		<th>Nacimiento</th>
+		<th>cedula</th>
+		<th></th>
+		<th></th>
+	</tr>
+	<% @voters.each do |voter| %>
+	<tr>
+		<td><%= voter.name %></td>
+		<td><%= voter.last_name %></td>
+		<td><%= voter.birth %></td>
+		<td><%= voter.cedula %></td>
+		<td><%= link_to 'Mostrar voter', voter_path(voter)%></td>
+		<td><%= link_to 'Editar voter', edit_voter_path(voter)%></td>
+		<td><%= link_to 'Eliminar voter', voter_path(voter), method: :delete, data: {confirm: 'Esta seguro de eliminar el voter?'}%></td>
+	</tr>
+	
+	<% end %>
+	
+</table>
+
+<td>
+	<%= link_to 'Crear voter', new_voter_path %>
+</td>
+
+<p>
+	<% if current_user.role_id == 1 %>
+	<%= link_to 'back to admin ', admin_path %>
+<% end %>
+
+</p>
+

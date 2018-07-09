@@ -1,0 +1,30 @@
+<h1>Datos voter</h1>
+<p>
+	<%= @voter.name %>
+</p>
+<p>
+	<%= @voter.last_name %>
+</p>
+<p>
+	<%= @voter.birth %>
+</p>
+<p>
+	<%= @voter.cedula %>
+</p>
+-----
+
+<p>
+	<%= link_to 'Mostrar candidatos y propuestas', candidates_path %>
+</p>
+
+<p>
+	<% if current_user.role_id == 1 %>
+		<%= link_to 'back to admin ', admin_path %>
+	<% end %>
+</p>
+
+<p>
+	<% if current_user.role_id == 1 %>
+		<%= link_to 'back to lista de votantes ', voters_path %>
+	<% end %>
+</p>

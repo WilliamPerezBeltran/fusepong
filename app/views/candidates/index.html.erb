@@ -1,0 +1,72 @@
+<h1>Candidatos</h1>
+
+<table>
+	<tr>
+		<% if current_user.role_id == 3 %>
+			<th>Votos</th>
+		<% end %>
+		<th>Nombre</th>
+		<th>Apellido</th>
+		<th>Partido</th>
+		<th>Descripcion</th>
+		<th>Propuestas</th>
+		<% if  current_user.role_id == 1 %>
+			<th>N° de votos obtenidos </th>
+		<% end %>
+		<th></th>
+		<th></th>
+	</tr>
+	<% @candidates.each do |candidate| %>
+	<tr>
+		<% if current_user.role_id == 3 %>
+			<td>
+				<%= link_to 'votar por este candidato', candidate_votes_path(candidate), method: :post, data: {confirm:'Esta seguro de votar por este candidato?'} %>
+			</td>
+		<% end %>
+		<td><%= candidate.name %></td>
+		<td><%= candidate.last_name %></td>
+		<td><%= candidate.party %></td>
+		<td><%= candidate.description %></td>
+
+		<% if  current_user.role_id == 2 && candidate.user == current_user %>
+			<td>
+				<%= link_to 'Propuestas de los candidatos',proposals_candidate_path(candidate) %>
+			</td>
+			<td><%= link_to 'Mostrar candidato', candidate_path(candidate)%></td>
+			<td><%= link_to 'E ditar candidato', edit_candidate_path(candidate)%></td>
+			<td><%= link_to 'Eliminar candidato', candidate_path(candidate), method: :delete, data: {confirm: 'Esta seguro de eliminar el candidato?'}%></td>
+		<% end %>
+
+		<% if  current_user.role_id == 1 %>
+			<td>
+				<%= link_to 'Propuestas de los candidatos',proposals_candidate_path(candidate) %>
+			</td>
+			<td>
+				<%= candidate.votes.count%>
+			</td>
+			<td><%= link_to 'Mostrar candidato', candidate_path(candidate)%></td>
+			<td><%= link_to 'E ditar candidato', edit_candidate_path(candidate)%></td>
+			<td><%= link_to 'Eliminar candidato', candidate_path(candidate), method: :delete, data: {confirm: 'Esta seguro de eliminar el candidato?'}%></td>
+		<% end %>
+
+		<% if  current_user.role_id == 3 %>
+			<td>
+				<%= link_to 'Propuestas de los candidatos',proposals_candidate_path(candidate) %>
+			</td>
+		<% end %>
+
+	</tr>
+	
+	<% end %>
+	
+</table>
+
+<% if current_user.role_id == 1 %>
+	<td>
+		<%= link_to 'Crear candidato', new_candidate_path %>
+	</td>
+<% end %>
+
+
+
+
